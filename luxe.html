@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchanted Glow Candles - Handcrafted Luxury Aromas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display (headings), Raleway (body), Inter (UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Variables for Design System - Light Mode Only */
+        :root {
+            --color-primary: #000000; /* Pure Black for main accents, strong text, CTAs */
+            --color-secondary: #FDFDFD; /* Very light subtle background/accent, almost white */
+            --color-background-light: #FDFDFD; /* Off-white/Cream - main background */
+            --color-text-dark: #333333; /* Softer dark grey for body text */
+            --color-highlight: #D4AF37; /* Subtle gold for badges */
+            --color-card-bg: #FFFFFF; /* Pure white for card backgrounds */
+            --color-border-light: #EEEEEE; /* Even lighter grey border */
+
+            /* Spacing Scale (rem) */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --spacing-4xl: 5rem;
+
+            /* Border Radius */
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --radius-full: 9999px;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif; /* Body text */
+            background-color: var(--color-background-light);
+            color: var(--color-text-dark);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif; /* Headings */
+            color: var(--color-primary);
+        }
+
+        .text-primary { color: var(--color-primary); }
+        .text-secondary-accent { color: var(--color-secondary); }
+        .bg-primary-light { background-color: var(--color-background-light); }
+        .bg-secondary-light-tone { background-color: var(--color-secondary); }
+        .bg-card { background-color: var(--color-card-bg); }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-full);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow for black CTA */
+        }
+        .btn-primary:hover {
+            background-color: #333333; /* Slightly lighter black on hover */
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); } /* More dramatic */
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); } /* More dramatic */
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+        }
+
+        .animate-fade-in-down { animation: fadeInDown 1.2s ease-out forwards; } /* Slower, smoother */
+        .animate-fade-in-up { animation: fadeInUp 1.2s ease-out forwards; } /* Slower, smoother */
+        .animate-fade-in-up-delay { animation: fadeInUp 1.2s ease-out 0.6s forwards; opacity: 0; } /* Slower, smoother */
+        .animate-fade-in { animation: fadeIn 1s ease-out forwards; } /* Slower, smoother */
+        .animate-pulse-slow { animation: pulse-slow 4s infinite ease-in-out; }
+        .animate-pulse-slow-delay { animation: pulse-slow 4s infinite ease-in-out 1s; } /* Add delay */
+
+        /* Product Card specific styles */
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04); /* More defined initial shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border-light); /* Subtle border */
+        }
+        .product-card:hover {
+            transform: translateY(-10px); /* More pronounced lift */
+            box-shadow: 0 25px 40px -8px rgba(0, 0, 0, 0.15), 0 15px 20px -5px rgba(0, 0, 0, 0.08); /* Deeper shadow on hover */
+            border-color: var(--color-primary); /* Border highlights on hover */
+        }
+
+        .product-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%); /* Darker overlay */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease; /* Slower fade */
+            padding: var(--spacing-xl); /* More padding */
+        }
+        .product-card:hover .product-card-overlay {
+            opacity: 1;
+        }
+        .product-card-overlay .btn-add-to-cart {
+            transform: translateY(30px); /* More dramatic slide-up */
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        .product-card:hover .product-card-overlay .btn-add-to-cart {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .badge {
+            position: absolute;
+            top: var(--spacing-lg); /* Adjusted position */
+            left: var(--spacing-lg); /* Adjusted position */
+            background-color: var(--color-highlight);
+            color: var(--color-primary); /* Black text on gold badge */
+            font-family: 'Inter', sans-serif; /* Use Inter for badges */
+            font-size: 0.85rem; /* Slightly larger */
+            font-weight: 700; /* Bolder */
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-full);
+            z-index: 10;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* More prominent shadow */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar Component - Modified for fixed, elegant structure -->
+    <header id="main-header" class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-lg py-3 px-6 md:px-16 transition-all duration-300 ease-in-out rounded-b-2xl">
+        <nav class="container mx-auto flex justify-between items-center w-full">
+            <!-- Logo Treatment -->
+            <a href="#" class="flex items-center space-x-4" aria-label="Enchanted Glow Home">
+                <img src="f112655b-bedc-46ed-a029-b239793c0ce1-removebg-preview.png" alt="Enchanted Glow Logo" class="h-12 md:h-14 rounded-xl shadow-sm transition-transform duration-300 hover:scale-105">
+                <span class="text-2xl md:text-3xl font-bold text-primary hidden sm:block font-playfair-display"></span>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-primary hover:text-gray-600 font-medium transition duration-300 text-[15px] font-raleway" aria-label="Go to Home section">Home</a>
+                <a href="#products" class="text-primary hover:text-gray-600 font-medium transition duration-300 text-[15px] font-raleway" aria-label="Go to Products section">Products</a>
+                <a href="#locations" class="text-primary hover:text-gray-600 font-medium transition duration-300 text-[15px] font-raleway" aria-label="Go to Locations section">Locations</a>
+                <a href="#social-media" class="text-primary hover:text-gray-600 font-medium transition duration-300 text-[15px] font-raleway" aria-label="Go to Social Media section">Social Media</a>
+                <a href="#contact" class="text-primary hover:text-gray-600 font-medium transition duration-300 text-[15px] font-raleway" aria-label="Go to Contact section">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" aria-label="Open mobile menu" class="text-primary focus:outline-none focus:text-gray-600 transition duration-300">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) - Positioned absolutely under the fixed header -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white rounded-b-lg py-4 mt-3 shadow-inner transition-all duration-300 ease-in-out transform -translate-y-2 opacity-0 absolute w-full left-0 top-full">
+            <a href="#home" class="block py-3 px-5 text-primary hover:bg-gray-100 rounded-lg transition duration-300 font-raleway" aria-label="Go to Home section">Home</a>
+            <a href="#products" class="block py-3 px-5 text-primary hover:bg-gray-100 rounded-lg transition duration-300 font-raleway" aria-label="Go to Products section">Products</a>
+            <a href="#locations" class="block py-3 px-5 text-primary hover:bg-gray-100 rounded-lg transition duration-300 font-raleway" aria-label="Go to Locations section">Locations</a>
+            <a href="#social-media" class="block py-3 px-5 text-primary hover:bg-gray-100 rounded-lg transition duration-300 font-raleway" aria-label="Go to Social Media section">Social Media</a>
+            <a href="#contact" class="block py-3 px-5 text-primary hover:bg-gray-100 rounded-lg transition duration-300 font-raleway" aria-label="Go to Contact section">Contact</a>
+        </div>
+    </header>
+
+    <!-- Spacer Div to prevent content overlap from fixed header -->
+    <div id="header-spacer" class="h-[80px] md:h-[90px] w-full"></div>
+
+    <!-- Hero Section Component -->
+    <section id="home" class="relative bg-gradient-to-br from-white to-gray-50 py-28 md:py-48 text-center overflow-hidden rounded-b-3xl shadow-2xl transition-colors duration-300">
+        <div class="container mx-auto px-8 relative z-10">
+            <h1 class="text-6xl md:text-8xl font-extrabold text-primary leading-tight mb-8 animate-fade-in-down font-playfair-display">
+                Illuminate Your World with <br class="hidden md:block">Enchanted Glow
+            </h1>
+            <p class="text-xl md:text-2xl text-text-dark mb-14 max-w-5xl mx-auto animate-fade-in-up font-raleway">
+                Discover handcrafted luxury candles designed to transform your space with captivating aromas and a warm, inviting glow. Each piece is a testament to timeless elegance and sensory delight.
+            </p>
+            <a href="#products" class="btn-primary inline-block text-xl font-semibold shadow-xl hover:shadow-2xl animate-fade-in-up-delay" aria-label="Explore our exquisite candle collection">
+                Explore Our Collection
+            </a>
+        </div>
+        <!-- Subtle Background Texture/Overlay -->
+        <div class="absolute inset-0 opacity-30" style="background: url('https://www.transparenttextures.com/patterns/cream-pixels.png') repeat; background-size: 100px; filter: saturate(0.5) brightness(1.2);"></div>
+        <!-- Blurred Light Shapes for Luxury Feel -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute w-64 h-64 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" style="top: 10%; left: 15%;"></div>
+            <div class="absolute w-80 h-80 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow-delay" style="bottom: 5%; right: 10%;"></div>
+        </div>
+    </section>
+
+    <!-- About Us Section Component -->
+    <section id="about" class="py-24 md:py-36 bg-primary-light rounded-3xl mx-6 md:mx-auto mt-16 shadow-xl transition-colors duration-300">
+        <div class="container mx-auto px-8 text-center max-w-6xl">
+            <h2 class="text-5xl md:text-6xl font-bold text-primary mb-12 font-playfair-display animate-fade-in">Our Passion for Light & Scent</h2>
+            <p class="text-lg md:text-xl text-text-dark max-w-5xl mx-auto leading-relaxed font-raleway animate-fade-in-up">
+                At Enchanted Glow, we are artisans of atmosphere. Each candle is a testament to our dedication, meticulously hand-poured using premium, sustainable waxes and infused with exquisite, long-lasting fragrances sourced globally. We are committed to crafting unique sensory experiences that elevate your everyday moments into rituals of tranquility and luxury. Our mission is to bring warmth, beauty, and an unforgettable aroma into every home, wrapped in elegance and sustainable craftsmanship.
+            </p>
+        </div>
+    </section>
+
+    <!-- Products Section Component -->
+    <section id="products" class="py-24 md:py-36 bg-gradient-to-br from-gray-50 to-white rounded-3xl mx-6 md:mx-auto mt-16 shadow-xl transition-colors duration-300">
+        <div class="container mx-auto px-8">
+            <h2 class="text-5xl md:text-6xl font-bold text-center text-primary mb-20 font-playfair-display animate-fade-in">Our Signature Collection</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-14">
+                <!-- Product Card 1 -->
+                <div class="product-card p-7 text-center bg-card">
+                    <div class="relative mb-5">
+                        <img src="400af14e-bb8a-49bf-8078-5578f85d6ee1.png" alt="Vanilla Bean Dream Candle" class="w-full h-72 object-cover rounded-xl shadow-md transition-transform duration-300">
+                        <span class="badge">New Arrival</span>
+                        <div class="product-card-overlay">
+                            <button class="btn-primary btn-add-to-cart text-base px-8 py-4" aria-label="Add Vanilla Bean Dream to cart">Quick Add</button>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-text-dark mb-2 font-playfair-display">Vanilla Bean Dream</h3>
+                    <p class="text-text-dark text-sm mb-4 font-raleway">A comforting blend of warm vanilla, sweet cream, and a hint of musk, evoking pure bliss.</p>
+                    
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card p-7 text-center bg-card">
+                    <div class="relative mb-5">
+                        <img src="7affffb4-f88b-419b-aef4-a07257517da2.png" alt="Lavender Serenity Candle" class="w-full h-72 object-cover rounded-xl shadow-md transition-transform duration-300">
+                        <span class="badge">Bestseller</span>
+                        <div class="product-card-overlay">
+                            <button class="btn-primary btn-add-to-cart text-base px-8 py-4" aria-label="Add Lavender Serenity to cart">Quick Add</button>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-text-dark mb-2 font-playfair-display">Lavender Serenity</h3>
+                    <p class="text-text-dark text-sm mb-4 font-raleway">Calming French lavender with hints of chamomile and soft amber, for ultimate relaxation.</p>
+                    
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card p-7 text-center bg-card">
+                    <div class="relative mb-5">
+                        <img src="fc6e2dd8-8881-419b-aef4-a07257517da2.png" alt="Forest Embrace Candle" class="w-full h-72 object-cover rounded-xl shadow-md transition-transform duration-300">
+                        <div class="product-card-overlay">
+                            <button class="btn-primary btn-add-to-cart text-base px-8 py-4" aria-label="Add Forest Embrace to cart">Quick Add</button>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-text-dark mb-2 font-playfair-display">Forest Embrace</h3>
+                    <p class="text-text-dark text-sm mb-4 font-raleway">Earthy notes of crisp pine, warm cedarwood, and fresh moss, bringing nature indoors.</p>
+                    
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="product-card p-7 text-center bg-card">
+                    <div class="relative mb-5">
+                        <img src="4a87178a-8fcf-4ec2-bdee-d4d6ff4d2797.png" alt="Citrus Burst Candle" class="w-full h-72 object-cover rounded-xl shadow-md transition-transform duration-300">
+                        <div class="product-card-overlay">
+                            <button class="btn-primary btn-add-to-cart text-base px-8 py-4" aria-label="Add Citrus Burst to cart">Quick Add</button>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-text-dark mb-2 font-playfair-display">Citrus Burst</h3>
+                    <p class="text-text-dark text-sm mb-4 font-raleway">Zesty lemon and vibrant orange with a refreshing touch of mint, invigorating your senses.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section Component -->
+    <section id="locations" class="py-24 md:py-36 bg-primary-light rounded-3xl mx-6 md:mx-auto mt-16 shadow-xl transition-colors duration-300">
+        <div class="container mx-auto px-8 text-center max-w-6xl">
+            <h2 class="text-5xl md:text-6xl font-bold text-primary mb-12 font-playfair-display animate-fade-in">Find Our Boutiques</h2>
+            <p class="text-lg md:text-xl text-text-dark mb-14 max-w-4xl mx-auto font-raleway animate-fade-in-up">
+                Immerse yourself in the full Enchanted Glow experience by visiting our exquisite boutiques. Discover our complete collection and find your perfect scent.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 text-left">
+                <!-- Location Card 1 -->
+                <div class="bg-secondary p-10 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-[1.01] hover:shadow-xl border border-gray-200">
+                    <h3 class="text-3xl font-semibold text-primary mb-5 font-playfair-display">Flagship Store - City Center</h3>
+                    <p class="text-text-dark mb-4 font-raleway"><i class="fas fa-map-marker-alt mr-4 text-primary"></i>123 Candlelight Lane, Metropolis, 10001</p>
+                    <p class="text-text-dark mb-4 font-raleway"><i class="fas fa-phone mr-4 text-primary"></i><a href="tel:+15551234567" class="hover:underline">+1 (555) 123-4567</a></p>
+                    <p class="text-text-dark font-raleway"><i class="fas fa-clock mr-4 text-primary"></i>Mon-Sat: 10 AM - 7 PM, Sun: 11 AM - 5 PM</p>
+                </div>
+                <!-- Location Card 2 -->
+                <div class="bg-secondary p-10 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-[1.01] hover:shadow-xl border border-gray-200">
+                    <h3 class="text-3xl font-semibold text-primary mb-5 font-playfair-display">Boutique Kiosk - Grand Mall</h3>
+                    <p class="text-text-dark mb-4 font-raleway"><i class="fas fa-map-marker-alt mr-4 text-primary"></i>Unit 45, Grand Shopping Mall, Suburbia, 10002</p>
+                    <p class="text-text-dark mb-4 font-raleway"><i class="fas fa-phone mr-4 text-primary"></i><a href="tel:+15559876543" class="hover:underline">+1 (555) 987-6543</a></p>
+                    <p class="text-text-dark font-raleway"><i class="fas fa-clock mr-4 text-primary"></i>Mon-Sun: 9 AM - 9 PM</p>
+                </div>
+            </div>
+            <p class="text-text-dark mt-16 text-sm font-raleway">
+                *Please note: Opening hours may vary on public holidays. We recommend calling ahead for current hours.
+            </p>
+        </div>
+    </section>
+
+    <!-- Social Media Section Component -->
+    <section id="social-media" class="py-24 md:py-36 bg-gradient-to-br from-white to-gray-50 rounded-3xl mx-6 md:mx-auto mt-16 shadow-xl transition-colors duration-300">
+        <div class="container mx-auto px-8 text-center max-w-5xl">
+            <h2 class="text-5xl md:text-6xl font-bold text-primary mb-12 font-playfair-display animate-fade-in">Connect With Our Community</h2>
+            <p class="text-lg md:text-xl text-text-dark mb-14 max-w-3xl mx-auto font-raleway animate-fade-in-up">
+                Join the Enchanted Glow family! Follow us on social media for new product launches, exclusive offers, behind-the-scenes glimpses, and daily doses of inspiration.
+            </p>
+            <div class="flex justify-center space-x-12 text-6xl md:text-7xl">
+                <a href="https://www.tiktok.com/@yourcompany" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-pink-600 transition duration-300 transform hover:scale-125" aria-label="Follow us on TikTok">
+                    <i class="fab fa-tiktok"></i>
+                    <span class="sr-only">TikTok</span>
+                </a>
+                <a href="https://www.facebook.com/yourcompany" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-blue-600 transition duration-300 transform hover:scale-125" aria-label="Follow us on Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span class="sr-only">Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/yourcompany" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-purple-600 transition duration-300 transform hover:scale-125" aria-label="Follow us on Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span class="sr-only">Instagram</span>
+                </a>
+            </div>
+            <p class="text-text-dark mt-16 text-sm font-raleway">
+                *Remember to replace "yourcompany" with your actual social media handles to link correctly.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section Component -->
+    <section id="contact" class="py-24 md:py-36 bg-primary-light rounded-3xl mx-6 md:mx-auto mt-16 shadow-xl mb-16 transition-colors duration-300">
+        <div class="container mx-auto px-8 text-center max-w-6xl">
+            <h2 class="text-5xl md:text-6xl font-bold text-primary mb-12 font-playfair-display animate-fade-in">Get in Touch</h2>
+            <p class="text-lg md:text-xl text-text-dark mb-14 max-w-4xl mx-auto font-raleway animate-fade-in-up">
+                Have a question about our exquisite products, an order, or a special request? Our dedicated team is here to provide personalized assistance. Fill out the form below or reach out directly.
+            </p>
+            <div class="max-w-xl mx-auto bg-secondary p-10 md:p-14 rounded-3xl shadow-2xl border border-gray-200">
+                <form class="space-y-8">
+                    <div>
+                        <label for="name" class="block text-primary text-left font-medium mb-3 text-lg font-raleway">Name</label>
+                        <input type="text" id="name" name="name" class="w-full p-4 rounded-xl border border-gray-300 bg-white text-text-dark focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 text-base" placeholder="Your Full Name" aria-label="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-primary text-left font-medium mb-3 text-lg font-raleway">Email</label>
+                        <input type="email" id="email" name="email" class="w-full p-4 rounded-xl border border-gray-300 bg-white text-text-dark focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 text-base" placeholder="your.email@example.com" aria-label="Your Email" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-primary text-left font-medium mb-3 text-lg font-raleway">Message</label>
+                        <textarea id="message" name="message" rows="7" class="w-full p-4 rounded-xl border border-gray-300 bg-white text-text-dark focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 text-base" placeholder="Tell us how we can help you..." aria-label="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full text-xl font-semibold shadow-md hover:shadow-lg mt-8" aria-label="Send your message">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <footer class="bg-primary text-white py-12 px-6 md:px-16 rounded-t-3xl transition-colors duration-300">
+        <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
+            <div class="mb-8 md:mb-0">
+                <p class="text-gray-200 text-md font-raleway">&copy; 2025 Enchanted Glow Candles. All rights reserved.</p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-10">
+                <a href="#" class="text-gray-200 hover:text-white transition duration-300 font-raleway text-md" aria-label="View Privacy Policy">Privacy Policy</a>
+                <a href="#" class="text-gray-200 hover:text-white transition duration-300 font-raleway text-md" aria-label="View Terms of Service">Terms of Service</a>
+                <a href="mailto:info@enchantedglow.com" class="text-gray-200 hover:text-white transition duration-300 font-raleway text-md" aria-label="Email us at info@enchantedglow.com">info@enchantedglow.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Component-like JavaScript for Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('-translate-y-2', 'opacity-0');
+                    mobileMenu.classList.add('translate-y-0', 'opacity-100');
+                }, 10); // Small delay to allow hidden to be removed first
+            } else {
+                mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+                mobileMenu.classList.add('-translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300); // Match transition duration
+            }
+        });
+
+        // Close mobile menu if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target) && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+                mobileMenu.classList.add('-translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Component-like JavaScript for Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const header = document.getElementById('main-header'); // Get the header element
+                if (targetElement && header) {
+                    // Calculate the offset based on the header's dynamic height and a small buffer
+                    const headerHeight = header.offsetHeight;
+                    window.scrollTo({
+                        top: targetElement.offsetTop - headerHeight - 20, // Adjust for header height + extra padding
+                        behavior: 'smooth'
+                    });
+                }
+                // Close mobile menu after clicking a link
+                if (window.innerWidth < 768 && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+                    mobileMenu.classList.add('-translate-y-2', 'opacity-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        });
+
+        // Dynamic Spacer Height for Fixed Header
+        function updateHeaderSpacerHeight() {
+            const header = document.getElementById('main-header');
+            const spacer = document.getElementById('header-spacer');
+            if (header && spacer) {
+                // Set spacer height to match header's rendered height
+                spacer.style.height = `${header.offsetHeight}px`;
+            }
+        }
+
+        // Update spacer height on load and resize
+        window.addEventListener('load', updateHeaderSpacerHeight);
+        window.addEventListener('resize', updateHeaderSpacerHeight);
+    </script>
+</body>
+</html>
